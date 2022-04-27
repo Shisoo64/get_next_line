@@ -5,19 +5,19 @@
 
 ### This project use `Make`, here are the commands to compile it
 
-**1. Compiling the project :**
+**1. 🗜️Compiling the project :**
 
 ```shell
 $ make
 ```
 
-**2. Cleaning all binary (.o) and executable files (.a) :**
+**2. 🧹Cleaning all binary (.o) and executable files (.a) :**
 
 ```shell
 $ make fclean
 ```
 
-**3. To use it in your code, simply include it's header :**
+**3. ✏️To use it in your code, simply include it's header :**
 
 ```C
 #include "get_next_line.h"
