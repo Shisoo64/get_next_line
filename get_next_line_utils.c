@@ -6,7 +6,7 @@
 /*   By: rlaforge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:13:21 by rlaforge          #+#    #+#             */
-/*   Updated: 2022/05/02 14:39:13 by rlaforge         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:14:54 by rlaforge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (buf);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	char	*tab;
 	int		longueur;
@@ -66,6 +66,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_strlcpy(tab, s1, longueur);
 	ft_strlcat(tab, s2, longueur);
+	free(s1);
 	return (tab);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rlaforge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:11:59 by rlaforge          #+#    #+#             */
-/*   Updated: 2022/05/02 14:32:12 by rlaforge         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:13:10 by rlaforge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ int	ft_has_backslash_n(char *s)
 	return (0);
 }
 
-char	*ft_read(char *str, char *buff, int fd)
+char	*ft_read(char *str, int fd)
 {
-	if(!read(fd, str, BUFFER_SIZE))
-		return (malloc(1));
+	char	*buff;
+
+	buff = malloc(sizeof(char) * BUFFER_SIZE);
+	if(!read(fd, str, BUFFER_SIZE) || !buff)
+		return (free(buff), free(str), NULL);
 	if (!ft_has_backslash_n(str))
 		while (!ft_has_backslash_n(buff) && read(fd, buff, BUFFER_SIZE))
 				str = ft_strjoin(str, buff);
@@ -44,21 +47,23 @@ char	*get_next_line(int fd)
 {
 	static char	*save;
 	char 		*str;
-	char 		*buff;
 	char 		*line;
 
-	str = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	buff = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!buff)
-		return (NULL);
-	str = ft_read(str, buff, fd);
+	str = malloc(sizeof(char) * BUFFER_SIZE);
+	if (!str)
+		return (free(str), NULL);
+	str = ft_read(str, fd);
+	if (!str)
+		return (free(str), NULL);
 	if (save && str)
 		str = ft_strjoin(save, str);
 	save = ft_substr(str, ft_has_backslash_n(str), ft_strlen(str));
 	line = ft_substr(str, 0, ft_has_backslash_n(str));
+	free(str);
 	return (line);
 }
 
+/*
 int main(void)
 {
     int fd;
@@ -70,3 +75,4 @@ int main(void)
     printf("%s", get_next_line(fd));
     printf("%s", get_next_line(fd));
 }
+*/
