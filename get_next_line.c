@@ -6,7 +6,7 @@
 /*   By: rlaforge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 14:11:59 by rlaforge          #+#    #+#             */
-/*   Updated: 2022/05/02 16:13:10 by rlaforge         ###   ########.fr       */
+/*   Updated: 2022/05/02 19:08:17 by rlaforge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_has_backslash_n(char *s)
 	if (!s)
 		return (0);
 	while (s[++i])
-		if (s[i] == '\n')
+		if (s[i] == '\n' || s[i] == '\0')
 			return (i + 1);
 	return (0);
 }
@@ -33,11 +33,13 @@ char	*ft_read(char *str, int fd)
 {
 	char	*buff;
 
-	buff = malloc(sizeof(char) * BUFFER_SIZE);
+	buff = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if(!read(fd, str, BUFFER_SIZE) || !buff)
 		return (free(buff), free(str), NULL);
+	buff[0] = '\0';
+	buff[BUFFER_SIZE] = '\0';
 	if (!ft_has_backslash_n(str))
-		while (!ft_has_backslash_n(buff) && read(fd, buff, BUFFER_SIZE))
+		while (read(fd, buff, BUFFER_SIZE) && !ft_has_backslash_n(buff))
 				str = ft_strjoin(str, buff);
 	free(buff);
 	return (str);
@@ -49,9 +51,13 @@ char	*get_next_line(int fd)
 	char 		*str;
 	char 		*line;
 
-	str = malloc(sizeof(char) * BUFFER_SIZE);
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	str = malloc(sizeof(char) * BUFFER_SIZE + 1);
 	if (!str)
-		return (free(str), NULL);
+		return (NULL);
+	str[BUFFER_SIZE] = '\0';
+	str[0] = '\0';
 	str = ft_read(str, fd);
 	if (!str)
 		return (free(str), NULL);
