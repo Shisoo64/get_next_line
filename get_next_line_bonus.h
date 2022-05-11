@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlaforge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 15:33:55 by rlaforge          #+#    #+#             */
-/*   Updated: 2022/05/11 15:35:48 by rlaforge         ###   ########.fr       */
+/*   Created: 2022/05/11 15:33:46 by rlaforge          #+#    #+#             */
+/*   Updated: 2022/05/11 15:33:49 by rlaforge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include<stddef.h>
 # include<stdlib.h>
-# include <unistd.h>
+# include<unistd.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlaforge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 15:32:42 by rlaforge          #+#    #+#             */
-/*   Updated: 2022/05/11 15:45:33 by rlaforge         ###   ########.fr       */
+/*   Created: 2022/05/11 15:34:03 by rlaforge          #+#    #+#             */
+/*   Updated: 2022/05/11 15:44:34 by rlaforge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"get_next_line.h"
+#include"get_next_line_bonus.h"
 
 int	ft_strlen(char *s)
 {
@@ -64,7 +64,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	ft_strlcpy(tab, s1, longueur);
 	ft_strlcat(tab, s2, longueur);
-	return (free(s1), tab);
+	free(s1);
+	return (tab);
 }
 
 int	ft_strlcat(char *dst, char *src, size_t size)
